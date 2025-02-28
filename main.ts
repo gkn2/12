@@ -1,0 +1,26 @@
+game.splash("welcome to my game!")
+let herosprite = sprites.create(assets.image`
+    duckhero
+`, SpriteKind.Player)
+herosprite.setPosition(10, 10)
+controller.moveSprite(herosprite)
+herosprite.sayText("move me around the screen")
+let name = game.askForString("What is your name?")
+let age = game.askForNumber("How old are you?")
+let message = "Good to meet you" + name
+herosprite.sayText(message)
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
+    sprites.destroy(otherSprite)
+    sprites.destroy(sprite)
+})
+let NewFood = sprites.create(assets.image`burger`, SpriteKind.Food)
+NewFood.x = randint(10, 150)
+NewFood.y = randint(10, 120)
+let NewFood1 = sprites.create(assets.image`pizza`, SpriteKind.Food)
+NewFood1.x = randint(10, 150)
+NewFood1.y = randint(10, 120)
+let enemy = sprites.create(assets.image`ghost`, SpriteKind.Enemy)
+enemy.x = randint(10, 150)
+enemy.y = randint(10, 120)
+enemy.follow(herosprite)
+enemy.setVelocity(20, 20)
